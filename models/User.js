@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const DataTypes = Sequelize.DataTypes;
   const User = sequelize.define('User', {
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -13,14 +13,6 @@ module.exports = (sequelize, Sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    location: {
-      type: DataTypes.STRING,
-      defaultValue: "India"
-    },
-    date: {
-      type: DataTypes.DATE,
-      defaultValue: Date.now,
-    }
   });
   return User;
 };

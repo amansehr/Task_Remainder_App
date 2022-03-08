@@ -1,26 +1,30 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const dotenv = require("dotenv");
-const session = require('express-session');
-dotenv.config();
-const passport = require("passport");
-const { loginCheck } = require("./auth/passport");
-loginCheck(passport);
+require("dotenv").config();
 
-//BodyParsing
-app.use(express.urlencoded({ extended: false }));
-app.use(session({
-    secret:'oneboy',
-    saveUninitialized: true,
-    resave: true
-  }));
-  
+const bodyParser = require('body-parser');
+const db = require('./services/db.services')
+const morgan = require('morgan')
+require("./services/jobScheduling.service")
 
-app.use(passport.initialize());
-app.use(passport.session());
-//Routes
-app.use("/", require("./routes/login"));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(morgan('tiny'))
 
-const PORT = process.env.PORT || 3000;
+db.sequelize.sync();
+//db.sequelize.sync({force : true});
 
-app.listen(PORT, console.log("Server has started at port " + PORT));
+let loginroute = require("./routes/login.js")
+let taskroute = require("./routes/task.route")
+app.use('/',loginroute)
+app.use('/',taskroute)
+
+app.get('/',(req,res) =>{   
+    return res.send({
+        data : "sample request"
+    })
+})
+
+app.listen(5555,(req,res) =>{
+    console.log("server started at ",5555)
+})
