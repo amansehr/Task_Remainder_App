@@ -3,7 +3,7 @@ const app = express();
 require("dotenv").config();
 
 const bodyParser = require('body-parser');
-const db = require('./services/db.services')
+const db = require('./models/index')
 const morgan = require('morgan')
 require("./services/jobScheduling.service")
 
@@ -15,7 +15,7 @@ db.sequelize.sync();
 //db.sequelize.sync({force : true});
 
 let loginroute = require("./routes/login.js")
-let taskroute = require("./routes/task.route")
+let taskroute = require("./routes/task.route.js")
 app.use('/',loginroute)
 app.use('/',taskroute)
 

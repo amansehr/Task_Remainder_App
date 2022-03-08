@@ -3,7 +3,7 @@ const {mailService} = require("../services/email.service")
 const User = require("../models/index").User;
 const Task = require("../models/index").Task;
 
-function remainder(){
+async function remainder(){
     try{
         let data = await Task.findAll({
             where : {

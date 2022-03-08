@@ -18,7 +18,7 @@ exports.createTask = async (req,res) => {
     }
 }
 
-exports.markDoneTask = (req,res) => {
+exports.markDoneTask = async (req,res) => {
     try{
         await taskmodel.update({completed : true},{
             where : {

@@ -1,5 +1,5 @@
 const userModel = require("../models/").user;
-const generateToken = require("../controller/jwtToken.controller").generateToken
+const generateToken = require("./jwtToken.Controller").generateToken
 const bcrypt = require('bcrypt')
 
 module.exports.loginByEmailPassword = (req,res) =>{
